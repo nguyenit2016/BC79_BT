@@ -1,0 +1,4 @@
+npm install: tai cac thu vien trong package.json vien
+npm run dev: start du an
+tao file .jsx = html + js
+Ctrl + P = search file
