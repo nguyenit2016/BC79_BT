@@ -1,28 +1,27 @@
-// import './App.css'
-import ConditionalRendering from './ConditionalRendering/ConditionalRendering'
-import DataBinding from './DataBinding/DataBinding'
-import DemoComponent from './DemoComponent/DemoComponent'
-import DemoUseState from './DemoUseState/DemoUseState'
-import EventHandling from './EventHandling/EventHandling'
-import ExLayout from './ExLayout/ExLayout'
-import DemoProp from './DemoProp/DemoProp'
-import RenderWithMap from './RenderWithMap/RenderWithMap'
-import ExCarAdvance from './ExCarAdvance/ExCarAdvance'
-import ExShoe from './ExShoe/ExShoe'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import './App.css'
+// import Header from './components/Header/Header'
+import HomePage from './pages/HomePage/HomePage'
+import LoginPage from './pages/LoginPage/LoginPage'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
+import Template from './template/Template'
+import Loading from './components/Loading/Loading'
+import DetailMoviePage from './pages/DetailMoviePage/DetailMoviePage'
 
 function App() {
-
   return (
     <div>
-      {/* <ExLayout /> */}
-      {/* <EventHandling /> */}
-      {/* <ConditionalRendering /> */}
-      {/* <DemoUseState /> */}
-      {/* <DataBinding /> */}
-      {/* <DemoProp /> */}
-      {/* <RenderWithMap /> */}
-      {/* <ExCarAdvance /> */}
-      <ExShoe />
+      <Loading />
+      <BrowserRouter>
+        {/* <Header /> */}
+        <Routes>
+          <Route path='/' element={<Template content={<HomePage />} />}></Route>
+          <Route path='/login' element={<Template content={<LoginPage />} />}></Route>
+          <Route path='/detail/:maPhim' element={<Template content={<DetailMoviePage />} />}></Route>
+          {/* Tạo route khi user nhập sai url */}
+          <Route path='*' element={<NotFoundPage />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }

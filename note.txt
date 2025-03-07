@@ -1,4 +1,2 @@
-npm install: tai cac thu vien trong package.json vien
-npm run dev: start du an
-tao file .jsx = html + js
-Ctrl + P = search file
+1. install tailwind: pm install tailwindcss @tailwindcss/vite
+    1.1. link chi tiết: https://tailwindcss.com/docs/installation/using-vite
