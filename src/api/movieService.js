@@ -16,3 +16,7 @@ export const listMovieService = () => {
 export const getDetailMovieService = (maPhim) => {
     return https.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
 }
+
+export const deleteMovie = (maPhim) => {
+    return https.delete(`/api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`);
+}
