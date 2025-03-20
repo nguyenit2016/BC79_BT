@@ -10,8 +10,17 @@ export default function HomePage() {
     <div>
       <BannerCarousel /><br /><br />
       <ListMovie />
-      <CinemaSystem />
-      <Showtimes />
+      <div className="grid grid-cols-12 gap-4 p-4">
+      {/* Cột hệ thống rạp (Chiếm 4/12) */}
+      <div className="col-span-4 border-r pr-4">
+        <CinemaSystem  />
+      </div>
+
+      {/* Cột lịch chiếu (Chiếm 8/12) */}
+      <div className="col-span-8">
+        <Showtimes  />
+      </div>
+    </div>
     </div>
   )
 }
