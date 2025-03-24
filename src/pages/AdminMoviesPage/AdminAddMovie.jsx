@@ -1,29 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { getDetailMovieService } from '../../api/movieService';
+import React from 'react'
 
-export default function AdminEditMovie() {
-    let { maPhim } = useParams();
-    let [movie, setMovie] = useState({});
-
-    useEffect(() => {
-        getDetailMovieService(maPhim)
-        .then((result) => {
-            setMovie(result.data.content);
-        }).catch((err) => {
-            
-        });
-    }, []);
-
+export default function AdminAddMovie() {
     return (
         <div className='bg-white p-2'>
-      <h2>Cập nhật phim</h2>
+      <h2>Thêm mới phim</h2>
             <div className="mb-3 row g-3 ">
                 <div className="col-auto col-sm-2">
                     <label htmlFor="tenPhim" className="col-form-label">Tên phim</label>
                 </div>
                 <div className="col-auto col-sm-10">
-                    <input type="text" id="tenPhim" className="form-control" value={movie.tenPhim} />
+                    <input type="text" id="tenPhim" className="form-control" value="" />
                 </div>
             </div>
             <div className="mb-3 row g-3">
@@ -31,7 +17,7 @@ export default function AdminEditMovie() {
                     <label htmlFor="trailer" className="col-form-label">Trailer</label>
                 </div>
                 <div className="col-auto col-sm-10">
-                    <input type="text" id="trailer" className="form-control" value={movie.trailer} />
+                    <input type="text" id="trailer" className="form-control" value="" />
                 </div>
             </div>
             <div className="mb-3 row g-3">
@@ -39,7 +25,7 @@ export default function AdminEditMovie() {
                     <label htmlFor="moTa" className="col-form-label">Mô tả</label>
                 </div>
                 <div className="col-auto col-sm-10">
-                    <input type="text" id="moTa" className="form-control" value={movie.moTa} />
+                    <input type="text" id="moTa" className="form-control" value="" />
                 </div>
             </div>
             <div className="mb-3 row g-3 align-items-center">
@@ -47,7 +33,7 @@ export default function AdminEditMovie() {
                     <label htmlFor="ngayKhoiChieu" className="col-form-label">Ngày khởi chiếu</label>
                 </div>
                 <div className="col-auto">
-                    <input type="date" id="ngayKhoiChieu" className="form-control" value={movie.ngayKhoiChieu} />
+                    <input type="date" id="ngayKhoiChieu" className="form-control" value="" />
                 </div>
             </div>
             <div className="mb-3 row g-3 align-items-center">
@@ -79,7 +65,7 @@ export default function AdminEditMovie() {
                     <label htmlFor="danhGia" className="col-form-label">Số sao</label>
                 </div>
                 <div className="col-auto">
-                    <input type="text" id="danhGia" className="form-control" value={movie.danhGia} />
+                    <input type="text" id="danhGia" className="form-control" value="" />
                 </div>
             </div>
 
@@ -88,11 +74,11 @@ export default function AdminEditMovie() {
                     <label htmlFor="tenPhim" className="col-form-label">Hình ảnh</label>
                 </div>
                 <div className="col-auto">
-                    <input type="file" id="tenPhim" className="form-control" text={movie.hinhAnh} />
+                    <input type="file" id="tenPhim" className="form-control" text="" />
                 </div>
             </div>
 
-            <button className='btn btn-success'>Cập nhật</button>
+            <button className='btn btn-success'>Thêm mới</button>
         </div>
     )
 }
