@@ -32,6 +32,9 @@ export default function AdminListMovie() {
                         <Link to={`/admin/films/edit/${item.maPhim}`}>Edit</Link>
                     </td>
                     <td><button className='btn btn-danger' onClick={() => handlDeleteMovie(item.maPhim)}>Delete</button></td>
+                    <td>
+                        <Link to={`/admin/films/showtime/${item.maPhim}`}>Show time</Link>
+                    </td>
                 </tr>
             );
         });
@@ -42,7 +45,7 @@ export default function AdminListMovie() {
             <div className='mb-3'>
                 <h3>Quản lý phim</h3>
                 <i className="bi bi-search"></i>
-                <button className='btn btn-primary text-blue-500 mb-4'>Thêm phim</button>
+                <Link className='nav-link text-blue-500 mb-4' to='/admin/films/addnew'>Thêm phim</Link>
                 <div className="input-group mb-2">
                     <input type="text" className="form-control" placeholder="Input search text" aria-label="Recipient's username" aria-describedby="button-addon2" />
                     <button className="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>

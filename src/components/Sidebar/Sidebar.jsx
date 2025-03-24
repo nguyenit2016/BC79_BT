@@ -34,7 +34,7 @@ export default function Sidebar() {
                 <Link className="nav-link text-white" to='/admin/films'>Films</Link>
               </li>
               <li className="nav-item">
-                <a href="#" className="nav-link text-white">Add new</a>
+                <Link className='nav-link text-white' to='/admin/films/addnew'>Add new</Link>
               </li>
             </ul>
           )}

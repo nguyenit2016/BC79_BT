@@ -12,6 +12,8 @@ import AdminPage from './pages/AdminPage/AdminPage'
 import AdminMoviesPage from './pages/AdminMoviesPage/AdminMoviesPage'
 import AdminTemplate from './template/AdminTemplate'
 import AdminEditMovie from './pages/AdminMoviesPage/AdminEditMovie'
+import AdminAddMovie from './pages/AdminMoviesPage/AdminAddMovie'
+import AdminShowTime from './pages/AdminMoviesPage/AdminShowTime'
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
           <Route path='/admin' element={<AdminTemplate content={<AdminPage />} />} ></Route>
           <Route path='/admin/films' element={<AdminTemplate content={<AdminMoviesPage />} />} ></Route>
           <Route path='/admin/films/edit/:maPhim' element={<AdminTemplate content={<AdminEditMovie />} />} ></Route>
+          <Route path='/admin/films/showtime/:maPhim' element={<AdminTemplate content={<AdminShowTime />} />} ></Route>
+          <Route path='/admin/films/addnew' element={<AdminTemplate content={<AdminAddMovie />} />} ></Route>
+          <Route path='/admin/films/showtime' element={<AdminTemplate content={<AdminShowTime />} />} ></Route>
           {/* Tạo route khi user nhập sai url */}
           <Route path='*' element={<NotFoundPage />}></Route>
         </Routes>

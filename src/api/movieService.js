@@ -20,3 +20,20 @@ export const getDetailMovieService = (maPhim) => {
 export const deleteMovie = (maPhim) => {
     return https.delete(`/api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`);
 }
+
+export const getRap = () => {
+    return https.get("/api/QuanLyRap/LayThongTinHeThongRap");
+}
+
+export const getCumRap = (maRap) => {
+    return https.get(`/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${maRap}`);
+}
+
+export const createShowTime = (lich) => {
+    return https.post(`/api/QuanLyDatVe/TaoLichChieu`, {
+        "maPhim": lich.maPhim,
+        "ngayChieuGioChieu": lich.ngayChieuGioChieu,
+        "maRap": lich.maRap,
+        "giaVe": lich.giaVe
+    });
+}
