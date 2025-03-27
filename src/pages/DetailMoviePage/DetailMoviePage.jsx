@@ -12,7 +12,7 @@ const API_HEADERS = {
 
 const MovieDetail = () => {
   const { movieId } = useParams();
-  const navigate = useNavigate(); // Hook để điều hướng
+  const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
@@ -21,31 +21,36 @@ const MovieDetail = () => {
       .catch(error => console.error("Lỗi khi lấy dữ liệu phim:", error));
   }, [movieId]);
 
-  if (!movie) return <p>Đang tải dữ liệu...</p>;
+  if (!movie) return <p className="text-white text-center mt-10">Đang tải dữ liệu...</p>;
 
   return (
-    <div className="p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-4">
       <motion.div 
-        className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-4" 
+        className="max-w-4xl w-full bg-gray-800 shadow-lg rounded-lg overflow-hidden p-6"
         initial={{ opacity: 0, y: 50 }} 
         animate={{ opacity: 1, y: 0 }}
       >
-        <img src={movie.hinhAnh} alt={movie.tenPhim} className="w-full h-96 object-cover" />
-        <h1 className="text-2xl font-bold mt-4">{movie.tenPhim}</h1>
-        <p className="mt-2 text-gray-700">{movie.moTa}</p>
-        <h2 className="text-lg font-semibold mt-4">Lịch Chiếu</h2>
+        {/* Hình ảnh */}
+        <img src={movie.hinhAnh} alt={movie.tenPhim} className="w-full h-96 object-cover rounded-lg" />
+        
+        {/* Tiêu đề */}
+        <h1 className="text-3xl font-bold mt-4 text-purple-400">{movie.tenPhim}</h1>
+        <p className="mt-2 text-gray-300">{movie.moTa}</p>
+
+        {/* Lịch chiếu */}
+        <h2 className="text-xl font-semibold mt-6 text-purple-400">Lịch Chiếu</h2>
         {movie.heThongRapChieu.map((cinema) => (
-          <div key={cinema.maHeThongRap} className="mt-4 border-t pt-2">
-            <h3 className="font-bold text-lg">{cinema.tenHeThongRap}</h3>
+          <div key={cinema.maHeThongRap} className="mt-4 border-t border-gray-700 pt-3">
+            <h3 className="font-bold text-lg text-white">{cinema.tenHeThongRap}</h3>
             {cinema.cumRapChieu.map((branch) => (
               <div key={branch.maCumRap} className="mt-2">
-                <h4 className="font-semibold">{branch.tenCumRap}</h4>
-                <div className="flex flex-wrap gap-2 mt-1">
+                <h4 className="font-semibold text-gray-300">{branch.tenCumRap}</h4>
+                <div className="flex flex-wrap gap-2 mt-2">
                   {branch.lichChieuPhim.map((showtime) => (
                     <button 
                       key={showtime.maLichChieu} 
-                      onClick={() => navigate(`/booking/${showtime.MaLichChieu}`)} // Chuyển đến trang Booking
-                      className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 transition"
+                      onClick={() => navigate(`/booking/${showtime.MaLichChieu}`)}
+                      className="px-4 py-2 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-800 transition duration-300"
                     >
                       {new Date(showtime.ngayChieuGioChieu).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                     </button>

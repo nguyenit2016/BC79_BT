@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Showtimes = () => {
   const [cinemas, setCinemas] = useState([]);
   const [selectedCinema, setSelectedCinema] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const API_URL =
     "https://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP01";
@@ -36,18 +38,22 @@ const Showtimes = () => {
     setSelectedCinema(event.target.value);
   };
 
+  const handleShowtimeClick = (maLichChieu) => {
+    navigate(`/booking/${maLichChieu}`);
+  };
+
   const selectedShowtimes =
     selectedCinema && cinemas.find((cinema) => cinema.maHeThongRap === selectedCinema);
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Lịch Chiếu Phim</h2>
+    <div className="max-w-4xl mx-auto p-6 bg-gray-800 text-white rounded-lg shadow-lg border border-purple-700">
+      <h2 className="text-2xl font-bold mb-4 text-purple-400">Lịch Chiếu Phim</h2>
 
       {error && <p className="text-red-500">{error}</p>}
 
       {/* Chọn hệ thống rạp */}
       <select
-        className="p-2 border rounded mb-4 w-full"
+        className="p-2 border rounded mb-4 w-full bg-gray-700 text-white border-gray-600"
         value={selectedCinema}
         onChange={handleSelectCinema}
       >
@@ -59,26 +65,27 @@ const Showtimes = () => {
         ))}
       </select>
 
-      {/* Hiển thị lịch chiếu trong thanh cuộn */}
-      <div className="max-h-[700px] overflow-y-auto border p-4 rounded-lg shadow bg-white">
+      {/* Hiển thị lịch chiếu */}
+      <div className="max-h-[600px] overflow-y-auto border border-gray-600 p-4 rounded-lg shadow bg-gray-900">
         {selectedShowtimes ? (
           selectedShowtimes.lstCumRap.map((cumRap) => (
-            <div key={cumRap.maCumRap} className="border-b pb-4 mb-4">
-              <h3 className="font-semibold text-lg">{cumRap.tenCumRap}</h3>
+            <div key={cumRap.maCumRap} className="border-b border-gray-700 pb-4 mb-4">
+              <h3 className="font-semibold text-lg text-purple-300">{cumRap.tenCumRap}</h3>
               {cumRap.danhSachPhim.map((movie) => (
                 <div key={movie.maPhim} className="mt-2">
-                  <p className="font-bold">{movie.tenPhim}</p>
+                  <p className="font-bold text-blue-500">{movie.tenPhim}</p>
                   <div className="flex flex-wrap gap-2">
                     {movie.lstLichChieuTheoPhim.map((showtime) => (
-                      <span
+                      <button
                         key={showtime.maLichChieu}
-                        className="px-3 py-1 bg-blue-500 text-white rounded"
+                        className="px-3 py-1 bg-purple-600 text-white rounded shadow-md hover:bg-purple-700 transition duration-300"
+                        onClick={() => handleShowtimeClick(showtime.maLichChieu)}
                       >
                         {new Date(showtime.ngayChieuGioChieu).toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
                         })}
-                      </span>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -86,7 +93,7 @@ const Showtimes = () => {
             </div>
           ))
         ) : (
-          <p>Vui lòng chọn rạp để xem lịch chiếu.</p>
+          <p className="text-gray-400">Vui lòng chọn rạp để xem lịch chiếu.</p>
         )}
       </div>
     </div>
