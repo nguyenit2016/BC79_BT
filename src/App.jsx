@@ -8,12 +8,14 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 import Template from './template/Template'
 import Loading from './components/Loading/Loading'
 import DetailMoviePage from './pages/DetailMoviePage/DetailMoviePage'
+import BookingTicket from './pages/BookingTicket/BookingTicket'
 import AdminPage from './pages/AdminPage/AdminPage'
 import AdminMoviesPage from './pages/AdminMoviesPage/AdminMoviesPage'
 import AdminTemplate from './template/AdminTemplate'
 import AdminEditMovie from './pages/AdminMoviesPage/AdminEditMovie'
 import AdminAddMovie from './pages/AdminMoviesPage/AdminAddMovie'
 import AdminShowTime from './pages/AdminMoviesPage/AdminShowTime'
+import TicketBooking from './pages/BookingTicket/BookingTicket'
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           <Route path='/login' element={<Template content={<LoginPage />} />}></Route>
           <Route path='/register' element={<Template content={<RegisterPage />} />}></Route>
           <Route path='/detail/:movieId' element={<Template content={<DetailMoviePage />} />}></Route>
+          <Route path='/booking/:MaLichChieu' element={<Template content={<BookingTicket />} />}></Route>
           <Route path='/admin' element={<AdminTemplate content={<AdminPage />} />} ></Route>
           <Route path='/admin/films' element={<AdminTemplate content={<AdminMoviesPage />} />} ></Route>
           <Route path='/admin/films/edit/:maPhim' element={<AdminTemplate content={<AdminEditMovie />} />} ></Route>

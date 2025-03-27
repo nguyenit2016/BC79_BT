@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import { motion } from "framer-motion";
 
@@ -12,6 +12,7 @@ const API_HEADERS = {
 
 const MovieDetail = () => {
   const { movieId } = useParams();
+  const navigate = useNavigate(); // Hook để điều hướng
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
@@ -41,9 +42,13 @@ const MovieDetail = () => {
                 <h4 className="font-semibold">{branch.tenCumRap}</h4>
                 <div className="flex flex-wrap gap-2 mt-1">
                   {branch.lichChieuPhim.map((showtime) => (
-                    <span key={showtime.maLichChieu} className="px-3 py-1 bg-blue-500 text-white rounded">
+                    <button 
+                      key={showtime.maLichChieu} 
+                      onClick={() => navigate(`/booking/${showtime.MaLichChieu}`)} // Chuyển đến trang Booking
+                      className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 transition"
+                    >
                       {new Date(showtime.ngayChieuGioChieu).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                    </span>
+                    </button>
                   ))}
                 </div>
               </div>
