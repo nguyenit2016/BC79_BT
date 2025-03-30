@@ -1,9 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { addMovie } from '../../api/movieService';
+import {CYBER_TOKEN} from '../../api/config';
 
 export default function AdminAddMovie() {
+    let [hinhAnh, setHinhAnh] = useState({});
+
+    let changeFile = (e) => {
+        let file = e.target.files[0];
+        console.log(file)
+        setHinhAnh(file);
+    }
+
+    let handlAddMovie = () => {
+        let formData = new FormData();
+        formData.append("tenPhim", "11111111111111");
+        formData.append("trailer", "giaTri");
+        formData.append("moTa", "giaTri");
+        formData.append("maNhom", "GP01");
+        formData.append("ngayKhoiChieu", "10/10/2026");
+        formData.append("sapChieu", true);
+        formData.append("danChieu", true);
+        formData.append("hot", true);
+        formData.append("danhGia", "10");
+        formData.append("hinhAnh", hinhAnh);
+
+        const response = fetch("https://movienew.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh", {
+            method: "POST",
+            body: formData,
+            headers: {
+                    TokenCybersoft: CYBER_TOKEN
+                }
+        });
+        console.log(response)
+
+        // addMovie(formData)
+        //     .then((result) => {
+        //         console.log(result)
+        //     }).catch((err) => {
+
+        //     });
+    }
     return (
         <div className='bg-white p-2'>
-      <h2>Thêm mới phim</h2>
+            <h2>Thêm mới phim</h2>
             <div className="mb-3 row g-3 ">
                 <div className="col-auto col-sm-2">
                     <label htmlFor="tenPhim" className="col-form-label">Tên phim</label>
@@ -74,11 +113,11 @@ export default function AdminAddMovie() {
                     <label htmlFor="tenPhim" className="col-form-label">Hình ảnh</label>
                 </div>
                 <div className="col-auto">
-                    <input type="file" id="tenPhim" className="form-control" text="" />
+                    <input onChange={changeFile} type="file" id="tenPhim" className="form-control" text="" />
                 </div>
             </div>
 
-            <button className='btn btn-success'>Thêm mới</button>
+            <button onClick={handlAddMovie} className='btn btn-success'>Thêm mới</button>
         </div>
     )
 }

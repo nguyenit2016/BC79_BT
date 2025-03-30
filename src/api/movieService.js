@@ -37,3 +37,11 @@ export const createShowTime = (lich) => {
         "giaVe": lich.giaVe
     });
 }
+
+export const addMovie = (movie) => {
+    return https({
+        url: "/api/QuanLyPhim/ThemPhimUploadHinh",
+        method: "POST",
+        body: movie
+    });
+};

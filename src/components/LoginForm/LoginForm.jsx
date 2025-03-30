@@ -1,14 +1,24 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { loginService } from '../../api/loginService';
+import { useDispatch } from 'react-redux';
+import { setUserAction } from '../../redux/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const navigate = useNavigate();
+  const disPatch = useDispatch();
+    const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log("Login Data:", data);
-    alert("Đăng nhập thành công!");
-    navigate("/");
+    loginService(data).then((result) => {
+      disPatch(setUserAction(result.data.content));
+      navigate("/");
+      const userJson = JSON.stringify(result.data.content);
+      localStorage.setItem("USER", userJson);
+  }).catch((err) => {
+      console.log(err);
+  });
   };
 
   return (
@@ -19,9 +29,9 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className="block text-sm font-medium text-gray-300">Email</label>
-            <input
-              type="email"
-              {...register("email", { required: "Email là bắt buộc" })}
+            <input 
+              type="text"
+              {...register("taiKhoan", { required: "Email là bắt buộc" })}
               className="w-full p-2 border border-gray-600 rounded mt-1 bg-gray-700 text-white focus:border-purple-500 focus:ring-purple-500"
             />
             {errors.email && <p className="text-red-500">{errors.email.message}</p>}
@@ -31,7 +41,7 @@ const LoginForm = () => {
             <label className="block text-sm font-medium text-gray-300">Mật khẩu</label>
             <input
               type="password"
-              {...register("password", { required: "Mật khẩu là bắt buộc" })}
+              {...register("matKhau", { required: "Mật khẩu là bắt buộc" })}
               className="w-full p-2 border border-gray-600 rounded mt-1 bg-gray-700 text-white focus:border-purple-500 focus:ring-purple-500"
             />
             {errors.password && <p className="text-red-500">{errors.password.message}</p>}
