@@ -31,14 +31,6 @@ export default function AdminAddMovie() {
                     TokenCybersoft: CYBER_TOKEN
                 }
         });
-        console.log(response)
-
-        // addMovie(formData)
-        //     .then((result) => {
-        //         console.log(result)
-        //     }).catch((err) => {
-
-        //     });
     }
     return (
         <div className='bg-white p-2'>
