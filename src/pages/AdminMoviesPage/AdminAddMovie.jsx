@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { addMovie } from '../../api/movieService';
 import {CYBER_TOKEN} from '../../api/config';
 
 export default function AdminAddMovie() {

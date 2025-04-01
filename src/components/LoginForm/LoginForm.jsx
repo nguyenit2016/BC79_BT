@@ -15,6 +15,7 @@ const LoginForm = () => {
       disPatch(setUserAction(result.data.content));
       navigate("/");
       const userJson = JSON.stringify(result.data.content);
+      console.log(userJson)
       localStorage.setItem("USER", userJson);
   }).catch((err) => {
       console.log(err);
